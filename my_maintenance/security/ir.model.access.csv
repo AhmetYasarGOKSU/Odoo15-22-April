@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_my_maintenance,access.my.maintenance,model_my_maintenance,,1,1,1,1
+access_maintenance,access.maintenance,model_maintenance,,1,1,1,1
+access_equipments,access.equipments,model_equipments,,1,1,1,1
+access_activity_types,access.activity.types,model_activity_types,,1,1,1,1
+access_equipment_categories,access.equipment.categories,model_equipment_categories,,1,1,1,1
+access_reporting,access.reporting,model_reporting,,1,1,1,1
+access_maintenance_stages,access.maintenance.stages,model_maintenance_stages,,1,1,1,1
+access_maintenance_teams,access.maintenance.teams,model_maintenance_teams,,1,1,1,1
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_my_maintenance_activity_types" model="ir.actions.act_window">
+        <field name="name">Activity Types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">activity.types</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+</odoo>

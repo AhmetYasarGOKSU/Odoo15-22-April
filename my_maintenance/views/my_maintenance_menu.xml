@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem id="menu_my_maintenance_root"
+              name="My Maintenance"
+              sequence="10">
+
+        <menuitem id="menu_my_maintenance_dashboard_master"
+                  name="Dashboard"
+                  action="action_my_maintenance_dashboard"
+                  sequence="10"/>
+
+        <menuitem id="menu_my_maintenance_master"
+                  name="Maintenance"
+                  sequence="11">
+
+            <menuitem id="menu_my_maintenance_request"
+                      name="Maintenance Request"
+                      action="action_my_maintenance_request"
+                      sequence="10"/>
+
+            <menuitem id="menu_my_maintenance_calendar"
+                      name="Maintenance Calendar"
+                      action="action_my_maintenance_calendar"
+                      sequence="20"/>
+        </menuitem>
+
+
+        <menuitem id="menu_my_maintenance_equipment_master"
+                  name="Equipments"
+                  action="action_my_maintenance_equipments"
+                  sequence="12"/>
+
+        <menuitem id="menu_my_maintenance_reporting_master"
+                  name="Reporting"
+                  sequence="13">
+
+            <menuitem id="menu_my_maintenance_reporting_request"
+                      name="Maintenance Request"
+                      action="action_my_maintenance_reporting"
+                      sequence="10"/>
+        </menuitem>
+        <menuitem id="menu_my_maintenance_configuration_master"
+                  name="Configuration"
+                  sequence="14">
+
+            <menuitem id="menu_my_maintenance_teams"
+                      name="Maintenance Teams"
+                      action="action_my_maintenance_teams"
+                      sequence="30"/>
+
+            <menuitem id="menu_my_maintenance_equipment_categories"
+                      name="Equipment Categories"
+                      action="action_my_maintenance_equipment_categories"
+                      sequence="40"/>
+
+            <menuitem id="menu_my_maintenance_stages"
+                      name="Maintenance Stages"
+                      action="action_my_maintenance_stages"
+                      sequence="50"/>
+
+            <menuitem id="menu_my_maintenance_activity_types"
+                      name="Activity Types"
+                      action="action_my_maintenance_activity_types"
+                      sequence="60"/>
+        </menuitem>
+    </menuitem>
+</odoo>

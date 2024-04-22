@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    Kanban State-->
+    <record id="view_equipment_categories_kanban" model="ir.ui.view">
+        <field name="name">equipment.categories.kanban</field>
+        <field name="model">equipment.categories</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        <h2>
+                                            <field name="name"/>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        Equipments: <field name="equipments"/>       Maintenance: <field name="maintenance"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+<!--    Tree State-->
+    <record id="view_equipment_categories_tree" model="ir.ui.view">
+        <field name="name">equipment.categories.tree</field>
+        <field name="model">equipment.categories</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+<!--        Form State-->
+    <record id="view_equipment_categories_form" model="ir.ui.view">
+        <field name="name">equipment.categories.form</field>
+        <field name="model">equipment.categories</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_equipments_category" class="oe_stat_button" icon="fa-cubes" type="object">
+                            <div class="o_stat_info">
+                                <field name="equipment_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Equipments</span>
+                            </div>
+                        </button>
+                        <button name="action_open_maintenance" type="object" class="oe_stat_button" icon="fa-wrench">
+                            <div class="o_stat_info">
+                                <field name="equipment_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Maintenance</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" string="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="responsible_id" class="oe_inline"/>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+<!--        Action State-->
+    <record id="action_my_maintenance_equipment_categories" model="ir.actions.act_window">
+        <field name="name">Equipment Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">equipment.categories</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+</odoo>

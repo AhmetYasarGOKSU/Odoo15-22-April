@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_equipments_kanban" model="ir.ui.view">
+        <field name="name">equipments.kanban</field>
+        <field name="model">equipments</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="equipment_category_id"/>
+                <field name="owner_id"/>
+                <field name="maintenance_team_id"/>
+                <field name="technician_id"/>
+                <field name="assigned_date"/>
+                <field name="scrap_date"/>
+                <field name="used_in_location"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        <h2>
+                                            <field name="name"/>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <field name="serial_number"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_equipments_tree" model="ir.ui.view">
+        <field name="name">equipments.tree</field>
+        <field name="model">equipments</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="owner_id"/>
+                <field name="assigned_date"/>
+                <field name="technician_id"/>
+                <field name="equipment_category_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_equipments_form" model="ir.ui.view">
+        <field name="name">equipments.form</field>
+        <field name="model">equipments</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                        <button name="416" type="action" class="oe_stat_button" icon="fa-wrench">-->
+<!--                            <field string="Maintenance" name="maintenance_count" widget="statinfo"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>-->
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" string="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="equipment_category_id"/>
+                            <field name="owner_id"/>
+                        </group>
+                        <group>
+                            <field name="maintenance_team_id"/>
+                            <field name="technician_id"/>
+                            <field name="assigned_date"/>
+                            <field name="scrap_date"/>
+                            <field name="used_in_location"/>
+                        </group>
+                    </group>
+                    <!--                    Notebook State-->
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description_note"/>
+                        </page>
+                        <page string="Product Information" name="product_information">
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="vendor"/>
+                                        <field name="vendor_reference"/>
+                                        <field name="model"/>
+                                        <field name="serial_number"/>
+                                    </group>
+                                    <group>
+                                        <field name="effective_date"/>
+                                        <field name="cost"/>
+                                        <field name="warranty_expiration_date"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="Maintenance" name="maintenance">
+                            <group>
+                                <group name="maintenance">
+                                    <label for="preventive_maintenance_frequency" string="Preventive Maintenance Frequency"/>
+                                    <div class="o_row">
+                                        <field name="preventive_maintenance_frequency"/> days
+                                    </div>
+                                    <label for="maintenance_duration" string="Maintenance Duration"/>
+                                    <div class="o_row">
+                                        <field name="maintenance_duration"/> hours
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <!--                    Chatter State-->
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_my_maintenance_equipments" model="ir.actions.act_window">
+        <field name="name">Equipments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">equipments</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+</odoo>
