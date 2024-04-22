@@ -28,40 +28,40 @@
 
         <menuitem id="menu_my_maintenance_equipment_master"
                   name="Equipments"
-                  action="action_my_maintenance_equipments"
+                  action="action_my_maintenance_equipment"
                   sequence="12"/>
 
-        <menuitem id="menu_my_maintenance_reporting_master"
+        <menuitem id="menu_my_maintenance_report_master"
                   name="Reporting"
                   sequence="13">
 
-            <menuitem id="menu_my_maintenance_reporting_request"
+            <menuitem id="menu_my_maintenance_report_request"
                       name="Maintenance Request"
-                      action="action_my_maintenance_reporting"
+                      action="action_my_maintenance_report"
                       sequence="10"/>
         </menuitem>
         <menuitem id="menu_my_maintenance_configuration_master"
                   name="Configuration"
                   sequence="14">
 
-            <menuitem id="menu_my_maintenance_teams"
+            <menuitem id="menu_my_maintenance_team"
                       name="Maintenance Teams"
-                      action="action_my_maintenance_teams"
+                      action="action_my_maintenance_team"
                       sequence="30"/>
 
-            <menuitem id="menu_my_maintenance_equipment_categories"
+            <menuitem id="menu_my_maintenance_equipment_category"
                       name="Equipment Categories"
-                      action="action_my_maintenance_equipment_categories"
+                      action="action_my_maintenance_equipment_category"
                       sequence="40"/>
 
-            <menuitem id="menu_my_maintenance_stages"
+            <menuitem id="menu_my_maintenance_stage"
                       name="Maintenance Stages"
-                      action="action_my_maintenance_stages"
+                      action="action_my_maintenance_stage"
                       sequence="50"/>
 
-            <menuitem id="menu_my_maintenance_activity_types"
+            <menuitem id="menu_my_maintenance_activity_type"
                       name="Activity Types"
-                      action="action_my_maintenance_activity_types"
+                      action="action_my_maintenance_activity_type"
                       sequence="60"/>
         </menuitem>
     </menuitem>

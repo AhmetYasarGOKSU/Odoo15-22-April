@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="view_equipments_kanban" model="ir.ui.view">
-        <field name="name">equipments.kanban</field>
-        <field name="model">equipments</field>
+    <record id="view_my_maintenance_equipment_kanban" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.kanban</field>
+        <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
             <kanban>
                 <field name="name"/>
@@ -36,9 +36,9 @@
         </field>
     </record>
 
-    <record id="view_equipments_tree" model="ir.ui.view">
-        <field name="name">equipments.tree</field>
-        <field name="model">equipments</field>
+    <record id="view_my_maintenance_equipment_tree" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.tree</field>
+        <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -50,18 +50,21 @@
         </field>
     </record>
 
-    <record id="view_equipments_form" model="ir.ui.view">
-        <field name="name">equipments.form</field>
-        <field name="model">equipments</field>
+    <record id="view_my_maintenance_equipment_form" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.form</field>
+        <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
-<!--                    <div class="oe_button_box" name="button_box">-->
-<!--                        <button name="416" type="action" class="oe_stat_button" icon="fa-wrench">-->
-<!--                            <field string="Maintenance" name="maintenance_count" widget="statinfo"/>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>-->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_maintenance" class="oe_stat_button" icon="fa-cubes"
+                                type="object">
+                            <div class="o_stat_info">
+                                <field name="maintenance_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Maintenance</span>
+                            </div>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
@@ -128,10 +131,10 @@
         </field>
     </record>
 
-    <record id="action_my_maintenance_equipments" model="ir.actions.act_window">
+    <record id="action_my_maintenance_equipment" model="ir.actions.act_window">
         <field name="name">Equipments</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">equipments</field>
+        <field name="res_model">my.maintenance.equipment</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 <!--    Kanban State-->
-    <record id="view_equipment_categories_kanban" model="ir.ui.view">
-        <field name="name">equipment.categories.kanban</field>
-        <field name="model">equipment.categories</field>
+    <record id="view_my_maintenance_equipment_category_kanban" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.category.kanban</field>
+        <field name="model">my.maintenance.equipment.category</field>
         <field name="arch" type="xml">
             <kanban>
                 <field name="name"/>
@@ -30,9 +30,9 @@
     </record>
 
 <!--    Tree State-->
-    <record id="view_equipment_categories_tree" model="ir.ui.view">
-        <field name="name">equipment.categories.tree</field>
-        <field name="model">equipment.categories</field>
+    <record id="view_my_maintenance_equipment_category_tree" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.category.tree</field>
+        <field name="model">my.maintenance.equipment.category</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -41,9 +41,9 @@
         </field>
     </record>
 <!--        Form State-->
-    <record id="view_equipment_categories_form" model="ir.ui.view">
-        <field name="name">equipment.categories.form</field>
-        <field name="model">equipment.categories</field>
+    <record id="view_my_maintenance_equipment_category_form" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.category.form</field>
+        <field name="model">my.maintenance.equipment.category</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -51,7 +51,7 @@
                         <button name="action_open_equipments_category" class="oe_stat_button" icon="fa-cubes" type="object">
                             <div class="o_stat_info">
                                 <field name="equipment_count" class="o_stat_value"/>
-                                <span class="o_stat_text">Equipments</span>
+                                <span class="o_stat_text">Equipment</span>
                             </div>
                         </button>
                         <button name="action_open_maintenance" type="object" class="oe_stat_button" icon="fa-wrench">
@@ -82,10 +82,10 @@
         </field>
     </record>
 <!--        Action State-->
-    <record id="action_my_maintenance_equipment_categories" model="ir.actions.act_window">
+    <record id="action_my_maintenance_equipment_category" model="ir.actions.act_window">
         <field name="name">Equipment Categories</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">equipment.categories</field>
+        <field name="res_model">my.maintenance.equipment.category</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
 

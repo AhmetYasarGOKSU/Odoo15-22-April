@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <record id="view_maintenance_teams_kanban" model="ir.ui.view">
-                <field name="name">maintenance.teams.kanban</field>
-                <field name="model">maintenance.teams</field>
+        <record id="view_my_maintenance_team_kanban" model="ir.ui.view">
+                <field name="name">my.maintenance.team.kanban</field>
+                <field name="model">my.maintenance.team</field>
                 <field name="arch" type="xml">
                         <kanban>
                                 <field name="name"/>
@@ -17,7 +17,7 @@
                                                                                 </h2>
                                                                         </li>
                                                                         <li>
-                                                                                <field name="teams_id"/>
+                                                                                <field name="member_ids"/>
                                                                         </li>
                                                                 </ul>
                                                         </div>
@@ -28,21 +28,21 @@
                 </field>
         </record>
 
-        <record id="view_maintenance_teams_tree" model="ir.ui.view">
-                <field name="name">maintenance.teams.tree</field>
-                <field name="model">maintenance.teams</field>
+        <record id="view_my_maintenance_team_tree" model="ir.ui.view">
+                <field name="name">my.maintenance.team.tree</field>
+                <field name="model">my.maintenance.team</field>
                 <field name="arch" type="xml">
                         <tree editable="bottom">
                                 <field name="name"/>
-                                <field name="teams_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" domain="[('share', '=', False)]"/>
+                                <field name="member_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" domain="[('share', '=', False)]"/>
                         </tree>
                 </field>
         </record>
 
 
-        <record id="view_maintenance_teams_form" model="ir.ui.view">
-                <field name="name">maintenance.teams.form</field>
-                <field name="model">maintenance.teams</field>
+        <record id="view_my_maintenance_team_form" model="ir.ui.view">
+                <field name="name">maintenance.team.form</field>
+                <field name="model">my.maintenance.team</field>
                 <field name="arch" type="xml">
                         <form>
                                 <sheet>
@@ -54,7 +54,7 @@
                                         </div>
                                         <group>
                                                 <group>
-                                                        <field name="teams_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" domain="[('share', '=', False)]"/>
+                                                        <field name="member_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" domain="[('share', '=', False)]"/>
                                                 </group>
                                                 <group>
 
@@ -66,10 +66,10 @@
         </record>
 
 
-        <record id="action_my_maintenance_teams" model="ir.actions.act_window">
+        <record id="action_my_maintenance_team" model="ir.actions.act_window">
         <field name="name">Teams</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">maintenance.teams</field>
+        <field name="res_model">my.maintenance.team</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
 </odoo>

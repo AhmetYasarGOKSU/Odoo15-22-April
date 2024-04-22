@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="action_my_maintenance_stages" model="ir.actions.act_window">
+    <record id="action_my_maintenance_stage" model="ir.actions.act_window">
         <field name="name">Stages</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">maintenance.stages</field>
+        <field name="res_model">my.maintenance.stage</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
 
