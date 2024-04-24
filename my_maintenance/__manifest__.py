@@ -13,6 +13,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/data.xml',
         'views/my_maintenance_dashboard.xml',
         'views/my_maintenance.xml',
         'views/my_maintenance_activity_type.xml',
@@ -24,7 +25,7 @@
         'views/my_maintenance_menu.xml',
 
     ],
-    'demo':[],
+    'demo': [],
     'qweb': [],
     'installable': True,
     'application': True,

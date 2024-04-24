@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+<!--    <record id="view_my_maintenance_stage_tree" model="ir.ui.view">-->
+<!--        <field name="name">my.maintenance.stage.tree</field>-->
+<!--        <field name="model">my.maintenance.stage</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree editable="top">-->
+<!--                <field name="reference" widget="handle"/>-->
+<!--                <field name="name" width="400"/>-->
+<!--                <field name="fold" width="500"/>-->
+<!--                <field name="done" width="300"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_my_maintenance_stage_form" model="ir.ui.view">-->
+<!--        <field name="name">maintenance.stage.form</field>-->
+<!--        <field name="model">my.maintenance.stage</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="fold"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="reference"/>-->
+<!--                            <field name="done"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
     <record id="action_my_maintenance_activity_type" model="ir.actions.act_window">
         <field name="name">Activity Types</field>
         <field name="type">ir.actions.act_window</field>

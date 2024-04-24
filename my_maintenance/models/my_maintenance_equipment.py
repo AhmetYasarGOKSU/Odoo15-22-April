@@ -9,6 +9,7 @@ class MyMaintenanceEquipment(models.Model):
 
     name = fields.Char(string='Equipment Name', required=True, tracking=True)
     equipment_category_id = fields.Many2one('my.maintenance.equipment.category', string='Equipment Category')
+    equipment_category_name = fields.Char(related='equipment_category_id.name')
     owner_id = fields.Many2one('res.users', string='Owner')
     maintenance_team_id = fields.Many2one('my.maintenance.team', string='Maintenance Team')
     assigned_date = fields.Date(string='Assigned Date', default=datetime.today())
@@ -20,28 +21,20 @@ class MyMaintenanceEquipment(models.Model):
     vendor_reference = fields.Char(string='Vendor Reference')
     model = fields.Char(string='Model')
     serial_number = fields.Char(string='Serial Number')
-    effective_date = fields.Date(string='Effective Date', required=True)
+    effective_date = fields.Date(string='Effective Date', default=datetime.today(), required=True)
     cost = fields.Float(string='Cost')
     warranty_expiration_date = fields.Date(string='Warranty Expiration Date')
     preventive_maintenance_frequency = fields.Integer(string='Preventive Maintenance Frequency')
     maintenance_duration = fields.Float(string='Maintenance Duration')
     maintenance_count = fields.Integer(string='Maintenance', compute='_compute_maintenance_count')
-    # equipment_count = fields.Integer(string='Equipment Count', compute='_compute_equipment_count')
-
+    reference = fields.Char(string='Order Reference', required=True, readonly=True, copy=False,
+                            default=lambda self: _('New'))
 
     @api.onchange('equipment_category_id')
     def onchange_equipment_category_id(self):
         if self.equipment_category_id:
             if self.equipment_category_id.name:
                 self.technician_id = self.equipment_category_id.responsible_id
-        else:
-            self.name = ''
-
-    @api.onchange('maintenance_team_id')
-    def onchange_maintenance_team_id(self):
-        if self.maintenance_team_id:
-            if self.maintenance_team_id.name:
-                self.name = self.maintenance_team_id.name
         else:
             self.name = ''
 
@@ -60,3 +53,18 @@ class MyMaintenanceEquipment(models.Model):
             "target": 'current',
         }
 
+    @api.model
+    def create(self, vals):
+        if vals['equipment_category_id'] == 1:
+            if vals.get('reference', _('New')) == _('New'):
+                vals['reference'] = self.env['ir.sequence'].next_by_code("seq_computers") or _("New")
+            res = super(MyMaintenanceEquipment, self).create(vals)
+            return res
+
+    # @api.model
+    # def create(self, vals):
+    #     print(vals['equipment_category_id'])
+    #     if vals.get('reference', _('New')) == _('New'):
+    #         vals['reference'] = self.env['ir.sequence'].next_by_code("seq_computers") or _("New")
+    #     res = super(MyMaintenanceEquipment, self).create(vals)
+    #     return res

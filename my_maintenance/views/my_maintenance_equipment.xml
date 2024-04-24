@@ -41,6 +41,7 @@
         <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="reference"/>
                 <field name="name"/>
                 <field name="owner_id"/>
                 <field name="assigned_date"/>
@@ -57,7 +58,7 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_open_maintenance" class="oe_stat_button" icon="fa-cubes"
+                        <button name="action_open_maintenance" class="oe_stat_button" icon="fa-wrench"
                                 type="object">
                             <div class="o_stat_info">
                                 <field name="maintenance_count" class="o_stat_value"/>

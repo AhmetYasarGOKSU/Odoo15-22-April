@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="seq_computer_equipment" model="ir.sequence">
+            <field name="name">Computer Equipment</field>
+            <field name="code">seq_computers</field>
+            <field name="prefix">CO</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="stage_0" model="maintenance.stage">
+            <field name="name">New Request</field>
+            <field name="sequence" eval="1"/>
+            <field name="fold" eval="False"/>
+        </record>
+        <record id="stage_1" model="maintenance.stage">
+            <field name="name">In Progress</field>
+            <field name="sequence" eval="2"/>
+            <field name="fold" eval="False"/>
+        </record>
+        <record id="stage_3" model="maintenance.stage">
+            <field name="name">Repaired</field>
+            <field name="sequence" eval="3"/>
+            <field name="fold" eval="True"/>
+            <field name="done" eval="True"/>
+        </record>
+        <record id="stage_4" model="maintenance.stage">
+            <field name="name">Scrap</field>
+            <field name="sequence" eval="4"/>
+            <field name="fold" eval="True"/>
+            <field name="done" eval="True"/>
+        </record>
+
+<!--        <record id="seq_software_equipment" model="ir.sequence">-->
+<!--            <field name="name">Software Equipment</field>-->
+<!--            <field name="code">software_seq</field>-->
+<!--            <field name="prefix">SW</field>-->
+<!--            <field name="padding">3</field>-->
+<!--            <field name="company_id" eval="False"/>-->
+<!--        </record>-->
+<!--        <record id="seq_monitor_equipment" model="ir.sequence">-->
+<!--            <field name="name">Monitor Equipment</field>-->
+<!--            <field name="code">monitor_seq</field>-->
+<!--            <field name="prefix">MO</field>-->
+<!--            <field name="padding">3</field>-->
+<!--            <field name="company_id" eval="False"/>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

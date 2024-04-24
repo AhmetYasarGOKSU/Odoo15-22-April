@@ -8,7 +8,6 @@ class MyMaintenanceEquipmentCategory(models.Model):
 
     name = fields.Char(string='Category Name', required=True, tracking=True)
     responsible_id = fields.Many2one('res.users', string='Responsible', tracking=True, required=True)
-
     note = fields.Text(string='Comments', tracking=True)
     equipments = fields.Integer(string='Equipments')
     maintenance = fields.Integer(string='Maintenance')
