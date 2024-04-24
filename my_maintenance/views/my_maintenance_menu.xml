@@ -63,6 +63,7 @@
                       name="Activity Types"
                       action="action_my_maintenance_activity_type"
                       sequence="60"/>
+
         </menuitem>
     </menuitem>
 </odoo>
