@@ -81,6 +81,21 @@
             </form>
         </field>
     </record>
+
+    <record id="view_my_maintenance_equipment_category_search" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.ca
+            tegory.search</field>
+        <field name="model">my.maintenance.equipment.category</field>
+        <field name="arch" type="xml">
+            <search string="Equipments">
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter string="Responsible" name="responsible_id" context="{'group_by':'responsible_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
 <!--        Action State-->
     <record id="action_my_maintenance_equipment_category" model="ir.actions.act_window">
         <field name="name">Equipment Categories</field>

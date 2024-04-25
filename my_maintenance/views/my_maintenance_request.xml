@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--  my.maintenance.request : Views -->
+    <record id="view_my_maintenance_request_kanban" model="ir.ui.view">
+        <field name="name">my.maintenance.request.tree</field>
+        <field name="model">my.maintenance.request</field>
+        <field name="arch" type="xml">
+            <kanban sample="1">
+                <field name="name"/>
+                <field name="color"/>
+                <field name="owner_user_id"/>
+                <field name="equipment_id"/>
+                <field name="category_id"/>
+                <field name="priority" modifiers="{}"/>
+                <field name="kanban_state"  modifiers="{&quot;required&quot;: true}"/>
+                <field name="user_id"/>
+                <progressbar field="activity_state"
+                             colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} oe_kanban_card oe_kanban_global_click">
+
+                            <div class="o_dropdown_kanban dropdown" t-if="!selection_mode">
+                                <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown"
+                                   data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <t t-if="widget.editable">
+                                        <a role="menuitem" type="edit" class="dropdown-item">Edit...</a>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                    </t>
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <b class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </b>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <span name="owner_user_id">Requested by :
+                                        <field name="user_id"/>
+                                        <br/>
+                                    </span>
+                                    <span class="oe_grey">
+                                        <field name="equipment_id"/>
+                                        <br/>
+                                    </span>
+                                    <span>
+                                        <field name="category_id"/>
+                                    </span>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="priority" widget="priority"/>
+                                        <div class="o_kanban_inline_block ml4 mr4">
+                                            <!-- <field name="activity_ids" widget="kanban_activity"/> -->
+                                            <span>(activity_ids, will be add)</span>
+                                        </div>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="kanban_state" widget="state_selection"/>
+                                        <field name="user_id" widget="many2one_avatar_user"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_request_tree" model="ir.ui.view">
+        <field name="name">my.maintenance.request.tree</field>
+        <field name="model">my.maintenance.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="req_date"/>
+                <field name="user_id"/>
+                <field name="equipment_id"/>
+                <field name="category_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_request_form" model="ir.ui.view">
+        <field name="name">my.maintenance.request.form</field>
+        <field name="model">my.maintenance.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_cancel" name="action_cancel" string="Cancel"
+                            states="new_request,in_progress,repaired,scrap"
+                            confirm="Are you sure that you changing Status to Cancelled?" type="object"/>
+
+                    <field name="state" widget="statusbar" options="{'clickable': 1}"
+                           statusbar_visible="new_request,in_progress,repaired,scrap"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Request"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Screen not working"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="equipment_id"/>
+                            <field name="category_id"/>
+                            <field name="req_date"/>
+                            <field name="maintenance_type" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="maintenance_team_id"/>
+                            <field name="user_id"/>
+                            <field name="schedule_date"/>
+                            <label for="duration"/>
+                            <div>
+                                <field name="duration" widget="float_time" class="oe_inline"/>
+                                <span class="ml8">hours</span>
+                            </div>
+                            <field name="priority" widget="priority"/>
+                            <field name="email_cc" string="Email cc" groups="base.group_user"/>
+                            <!--                            <field name="company_id" options="{'no_create': True}" groups="base.group_user"/>-->
+                        </group>
+                    </group>
+                     <group>
+                        <field name="description" placeholder="Notes"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_request_pivot" model="ir.ui.view">
+        <field name="name">equipment.request.pivot</field>
+        <field name="model">maintenance.request</field>
+        <field name="arch" type="xml">
+            <pivot string="maintenance Request" sample="1">
+                <field name="user_id"/>
+                <field name="stage_id"/>
+                <!--                <field name="color" invisible="1"/>-->
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_request_calendar" model="ir.ui.view">
+        <field name="name">my.maintenance.request.calendar</field>
+        <field name="model">my.maintenance.request</field>
+        <field name="arch" type="xml">
+            <calendar date_start="schedule_date" date_delay="duration" color="user_id" event_limit="5">
+                <field name="user_id" filters="1"/>
+                <field name="priority"/>
+                <field name="maintenance_type"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_request_graph" model="ir.ui.view">
+        <field name="name">my.maintenance.request.graph</field>
+        <field name="model">my.maintenance.request</field>
+        <field name="arch" type="xml">
+            <graph string="maintenance Request" sample="1">
+                <field name="user_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_request_search" model="ir.ui.view">
+        <field name="name">my.maintenance.request.search</field>
+        <field name="model">my.maintenance.request</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field string="Equipment" name="name" filter_domain="[
+                    '|', '|', '|',
+                    ('name', 'ilike', self), ('model', 'ilike', self), ('serial_no', 'ilike', self), ('partner_ref', 'ilike', self)]"/>
+                <field string="Category" name="category_id"/>
+                <field name="owner_user_id"/>
+                <separator/>
+                <filter string="High-priority" name="high_priority" domain="[('priority', '=', '3')]"/>
+                <filter string="Medium-priority" name="medium_priority" domain="[('priority', '=', '2')]"/>
+                <filter string="Low-priority" name="low_priority" domain="[('priority', '=', '1')]"/>
+                <filter string="None-priority" name="none_priority" domain="[('priority', '=', '0')]"/>
+                <group expand='0' string='Group by...'>
+                    <filter string='Category' name="category" domain="[]" context="{'group_by': 'category_id'}"/>
+                    <filter string='Owner' name="owner" domain="[]" context="{'group_by': 'owner_user_id'}"/>
+                    <filter string='Vendor' name="vendor" domain="[]" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- my.maintenance.request : Actions -->
+    <record id="action_my_maintenance_request" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">my.maintenance.request</field>
+        <field name="view_mode">kanban,tree,form,pivot,graph,calendar</field>
+        <!-- Default Group By and Filter -->
+        <field name="context">{}</field>
+        <!-- Filter field with some condition -->
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Track equipments and link it to an employee or department.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_my_maintenance_request_calendar" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">my.maintenance.request</field>
+        <field name="view_mode">calendar,kanban,tree,form,pivot,graph</field>
+        <!-- Default Group By and Filter -->
+        <field name="context">{}</field>
+        <!-- Filter field with some condition -->
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Track equipments and link it to an employee or department.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_my_maintenance_request_reports" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">my.maintenance.request</field>
+        <field name="view_mode">graph,pivot,kanban,tree,form,calendar</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new maintenance request
+            </p>
+            <p>
+                Follow the process of the request and communicate with the collaborator.
+            </p>
+        </field>
+    </record>
+
+</odoo>

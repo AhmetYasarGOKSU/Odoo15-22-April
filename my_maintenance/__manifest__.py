@@ -21,7 +21,7 @@
         'views/my_maintenance_equipment.xml',
         'views/my_maintenance_stage.xml',
         'views/my_maintenance_team.xml',
-        'views/my_maintenance_report.xml',
+        'views/my_maintenance_request.xml',
         'views/my_maintenance_menu.xml',
 
     ],

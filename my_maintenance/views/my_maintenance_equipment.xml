@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="view_my_maintenance_equipment_kanban" model="ir.ui.view">
+    <record id="view_equipments_kanban" model="ir.ui.view">
         <field name="name">my.maintenance.equipment.kanban</field>
         <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
             <kanban>
+                <field name="color"/>
                 <field name="name"/>
-                <field name="equipment_category_id"/>
                 <field name="owner_id"/>
-                <field name="maintenance_team_id"/>
                 <field name="technician_id"/>
-                <field name="assigned_date"/>
-                <field name="scrap_date"/>
-                <field name="used_in_location"/>
+                <progressbar field="activity_state"
+                             colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_global_click">
-                            <div class="oe_kanban_details">
-                                <ul>
-                                    <li>
-                                        <h2>
-                                            <field name="name"/>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <field name="serial_number"/>
-                                    </li>
-                                </ul>
+                        <div t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} oe_kanban_card oe_kanban_global_click">
+
+                            <div class="o_dropdown_kanban dropdown" t-if="!selection_mode">
+                                <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown"
+                                   data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <t t-if="widget.editable">
+                                        <a role="menuitem" type="edit" class="dropdown-item">Edit...</a>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                    </t>
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <b class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </b>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <span name="owner_id">Requested by :
+                                        <field name="owner_id"/>
+                                        <br/>
+                                    </span>
+                                    <span class="oe_grey">
+                                        <field name="technician_id"/>
+                                        <br/>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </t>
@@ -36,22 +55,24 @@
         </field>
     </record>
 
-    <record id="view_my_maintenance_equipment_tree" model="ir.ui.view">
+    <record id="view_equipments_tree" model="ir.ui.view">
         <field name="name">my.maintenance.equipment.tree</field>
         <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="reference"/>
                 <field name="name"/>
-                <field name="owner_id"/>
+                <field name="employee_id"/>
+                <field name="department_id"/>
                 <field name="assigned_date"/>
+                <field name="serial_number"/>
                 <field name="technician_id"/>
                 <field name="equipment_category_id"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_my_maintenance_equipment_form" model="ir.ui.view">
+    <record id="view_equipments_form" model="ir.ui.view">
         <field name="name">my.maintenance.equipment.form</field>
         <field name="model">my.maintenance.equipment</field>
         <field name="arch" type="xml">
@@ -69,13 +90,15 @@
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
-                            <field name="name" string="Name"/>
+                            <field name="name" string="Equipment_Name" placeholder="e.g. LED Monitor"/>
                         </h1>
                     </div>
                     <group>
                         <group>
                             <field name="equipment_category_id"/>
-                            <field name="owner_id"/>
+                            <field name="used_by"/>
+                            <field name="employee_id" attrs="{'invisible': [('used_by', '=', 'department')]}"/>
+                            <field name="department_id" attrs="{'invisible': [('used_by', '=', 'employee')]}"/>
                         </group>
                         <group>
                             <field name="maintenance_team_id"/>
@@ -110,25 +133,49 @@
                         <page string="Maintenance" name="maintenance">
                             <group>
                                 <group name="maintenance">
-                                    <label for="preventive_maintenance_frequency" string="Preventive Maintenance Frequency"/>
+                                    <label for="preventive_maintenance_frequency"
+                                           string="Preventive Maintenance Frequency"/>
                                     <div class="o_row">
-                                        <field name="preventive_maintenance_frequency"/> days
+                                        <field name="preventive_maintenance_frequency"/>
+                                        days
                                     </div>
                                     <label for="maintenance_duration" string="Maintenance Duration"/>
                                     <div class="o_row">
-                                        <field name="maintenance_duration"/> hours
+                                        <field name="maintenance_duration"/>
+                                        hours
                                     </div>
                                 </group>
                             </group>
                         </page>
                     </notebook>
-                    <!--                    Chatter State-->
+                    <!-- Chatter State -->
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <record id="view_my_maintenance_equipment_search" model="ir.ui.view">
+        <field name="name">my.maintenance.equipment.search</field>
+        <field name="model">my.maintenance.equipment</field>
+        <field name="arch" type="xml">
+            <search string="Equipments">
+                <separator/>
+<!--                <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>-->
+<!--                <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>-->
+<!--                <filter string="Others" name="other" domain="[('gender', '=', 'other')]"/>-->
+                <group expand="1" string="Group By">
+                    <filter string="Technician" name="technician_id" context="{'group_by':'technician_id'}"/>
+                    <filter string="Category" name="equipment_category_id" context="{'group_by':'equipment_category_id'}"/>
+                    <filter string="Owner" name="owner_id" context="{'group_by':'owner_id'}"/>
+                    <filter string="Vendor" name="vendor" context="{'group_by':'vendor'}"/>
+                    <filter string="Employee" name="employee_id" context="{'group_by':'employee_id'}"/>
+                    <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

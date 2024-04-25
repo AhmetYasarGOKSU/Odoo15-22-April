@@ -7,7 +7,7 @@
 
         <menuitem id="menu_my_maintenance_dashboard_master"
                   name="Dashboard"
-                  action="action_my_maintenance_dashboard"
+                  action="action_dashboard_my_maintenance_team"
                   sequence="10"/>
 
         <menuitem id="menu_my_maintenance_master"
@@ -21,7 +21,7 @@
 
             <menuitem id="menu_my_maintenance_calendar"
                       name="Maintenance Calendar"
-                      action="action_my_maintenance_calendar"
+                      action="action_my_maintenance_request_calendar"
                       sequence="20"/>
         </menuitem>
 
@@ -37,7 +37,7 @@
 
             <menuitem id="menu_my_maintenance_report_request"
                       name="Maintenance Request"
-                      action="action_my_maintenance_report"
+                      action="action_my_maintenance_request_reports"
                       sequence="10"/>
         </menuitem>
         <menuitem id="menu_my_maintenance_configuration_master"

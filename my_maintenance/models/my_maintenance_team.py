@@ -6,4 +6,5 @@ class MyMaintenanceTeam(models.Model):
     _description = "Maintenance Team"
 
     name = fields.Char('Team Name', required=True, tracking=True)
+    color = fields.Integer('Color Index')
     member_ids = fields.Many2many('res.users', string='Team Members', tracking=True)

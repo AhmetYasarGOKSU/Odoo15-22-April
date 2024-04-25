@@ -4,7 +4,7 @@ access_my_maintenance,access.my.maintenance,model_my_maintenance,,1,1,1,1
 access_my_maintenance_equipment,access.my.maintenance.equipment,model_my_maintenance_equipment,,1,1,1,1
 access_my_maintenance_activity_type,access.my.maintenance.activity.type,model_my_maintenance_activity_type,,1,1,1,1
 access_my_maintenance_equipment_category,access.my.maintenance.equipment.category,model_my_maintenance_equipment_category,,1,1,1,1
-access_my_maintenance_report,access.my.maintenance.report,model_my_maintenance_report,,1,1,1,1
+access_my_maintenance_request,access.my.maintenance.request,model_my_maintenance_request,,1,1,1,1
 access_my_maintenance_stage,access.my.maintenance.stage,model_my_maintenance_stage,,1,1,1,1
 access_my_maintenance_team,access.my.maintenance.team,model_my_maintenance_team,,1,1,1,1
 
